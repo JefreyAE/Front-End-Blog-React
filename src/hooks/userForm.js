@@ -14,7 +14,7 @@ export const useForm = (formInit = {}) => {
     return object;
   }
 
-  const cambiado = ({target})=>{
+  const updated = ({target})=>{
     const {name, value} = target;
     setForm({...form, [name]: value});
   }
@@ -31,6 +31,6 @@ export const useForm = (formInit = {}) => {
     return{
         form,
         sendForm,
-        cambiado
+        updated
     }
 }

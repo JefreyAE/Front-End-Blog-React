@@ -7,6 +7,8 @@ import { Footer } from '../components/layouts/Footer';
 import { Home } from "../components/pages/Home";
 import { Articles } from "../components/pages/articles/Articles";
 import { Create } from "../components/pages/articles/Create";
+import { Article } from "../components/pages/articles/Article";
+import { Update } from "../components/pages/articles/Update";
 
 export const AppRoutes = () => {
     return(
@@ -19,6 +21,10 @@ export const AppRoutes = () => {
                     <Route path="/home" element={<Home />}/>
                     <Route path="/articles" element={<Articles />}/>
                     <Route path="/new-article" element={<Create />}/>
+                    <Route path="/search/:search" element={<Articles />}/>
+                    <Route path="/article/:id" element={<Article />} />
+                    <Route path="/article/update/:id" element={<Update />} />
+                    <Route path="*" element={<div className="jumbo"><h1>Page not found</h1></div>}/>
                 </Routes>
             </section>   
             <Sidebar/>

@@ -20,6 +20,7 @@ body{
       "footer footer footer footer"
   ;
   grid-template-rows: 100px 70px auto 70px;
+  grid-template-columns: 1fr 1fr 1fr 25%;
 }
 
 /*ESTILOS CABECERA*/
@@ -129,6 +130,16 @@ body{
   font-size: 30px;
 }
 
+.article-item h3 a{
+  text-decoration: none;
+  color: black;
+}
+
+.article-item h3 a:hover{
+  color: rgb(0, 0, 0);
+}
+
+
 .article-item .edit{
   margin-right: 20px;
 }
@@ -156,6 +167,17 @@ body{
   display: block;
   margin-bottom: 40px;
 }
+
+.jumbo .mask{
+  width: 500px;
+  margin:  auto;
+  margin-bottom: 20px;
+}
+
+.jumbo .mask img{
+  width: 100%;
+}
+
 
 .button,
 button,
@@ -247,6 +269,39 @@ input[type="button"]{
   color: #0b468a;
   text-decoration: none;
 }
+
+.form-group{
+  width: 50%;
+  margin: 0 auto;
+}
+
+.form-group label{
+  display: block;
+  text-align: left;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"],
+.form-group textarea{
+    display: block;
+    margin: 0 auto;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 5px;
+    background: #f6f7f9;
+    color: #454545;
+    width: 100%;
+    opacity: 4;
+    outline: 0;
+    border-color: transparent;
+    border: 1px solid #ddd;
+    outline: 0;
+}
+
+
 
 @media (max-width: 1085px){
   .content {

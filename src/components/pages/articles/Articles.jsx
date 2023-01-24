@@ -3,16 +3,29 @@ import { useState, useEffect } from 'react';
 import { Global } from '../../../helpers/Global';
 import { Ajax } from '../../../helpers/Ajax';
 import { ArticleList } from './ArticleList';
+import { useParams } from "react-router-dom";
 
 export const Articles = () => {
 
   const [ articles, setArticles ] = useState([]);
   const [ loading, setLoading ] = useState(true);
+  const [ reload, setReload ] = useState(true);
+  const [ message, setMessage ] = useState();
+
+  const { search } = useParams();
 
   useEffect(() => {
-    const url = Global.url + "article/articles/";
+    let url = Global.url + "article/articles";
+    if(search){
+      url = Global.url + "article/search/" + search;
+    }
+
     getArticles(url);
-  }, []);
+  }, [reload, search]);
+
+  const reloadList = () => {
+    reload ? setReload(false) : setReload(true);
+  }
 
   const getArticles = async (url) => {
 
@@ -20,6 +33,13 @@ export const Articles = () => {
 
     if (data.status === 'success') {
       setArticles(data.articles);
+      if(data.articles.length === 0){
+        setMessage("Not articles found");
+      }
+    }
+    if(data.status === 'error'){
+      setArticles([]);
+      setMessage(data.message);
     }
 
     setLoading(loading);
@@ -27,9 +47,10 @@ export const Articles = () => {
 
   return (
     <>
-      {articles.length >= 1 ? 
-        <ArticleList articles={articles} setArticles={setArticles} /> : 
-        (loading ? (<h1>Loading...</h1>) : (<h1>Not articles found</h1>))
+      {loading ? (<h1>Loading...</h1>) : (
+        articles.length >= 1 ? <ArticleList articles={articles} reloadList={reloadList} setArticles={setArticles} /> :
+          <h1>{message}</h1>
+        )
       }
     </>
   )

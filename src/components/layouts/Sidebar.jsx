@@ -1,13 +1,24 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 export const Sidebar = () => {
+
+    const navigate = useNavigate();
+
+    const search =  (e) => {
+        e.preventDefault();
+
+        navigate("/search/" + e.target.search_field.value);
+    }
+
   return (
     <aside className="lateral">
         <div className="search">
-            <h3 className="title">Buscador</h3>
-            <form>
+            <h3 className="title">Search article</h3>
+            <form onSubmit={search}>
                 <input type="text" id="search_field" />
-                <button id="search">Buscar</button>
+                <button id="search">Search</button>
             </form>
         </div>
 

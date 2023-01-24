@@ -1,5 +1,5 @@
 
-export const Ajax = async (url = "", method, formData) => {
+export const Ajax = async (url = "", method, formData, files = false) => {
 
     let loading = true;
 
@@ -11,14 +11,25 @@ export const Ajax = async (url = "", method, formData) => {
         };
     }
 
-    if (method === 'POST' || method === 'PUT') {
-        options = {
-            method: method,
-            body: JSON.stringify(formData),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        };
+    if (method === "POST" || method === "PUT") {
+
+        let body = "";
+        if(files){
+            options = {
+                method: method,
+                mode: 'cors',
+                body: formData 
+            };
+        }else{
+            options = {
+                method: method,
+                mode: 'cors',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            };
+        }
     }
     const request = await fetch(url, options);
     const data = await request.json();
